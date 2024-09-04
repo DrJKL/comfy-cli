@@ -838,7 +838,7 @@ def registry_install(
     node_specific_path = custom_nodes_path / node_id  # Subdirectory for the node
     if node_specific_path.exists():
         print(
-            f"[bold red] The node {node_id} already exists in the workspace. This migit delete any model files in the node.[/bold red]"
+            f"[bold red] The node {node_id} already exists in the workspace. This might delete any model files in the node.[/bold red]"
         )
 
         confirm = ui.prompt_confirm_action(
@@ -850,11 +850,11 @@ def registry_install(
     node_specific_path.mkdir(parents=True, exist_ok=True)  # Create the directory if it doesn't exist
 
     local_filename = node_specific_path / f"{node_id}-{node_version.version}.zip"
-    logging.debug(f"Start downloading the node {node_id} version {node_version.version} to {local_filename}")
+    logging.debug(f"Downloading the node {node_id} version {node_version.version} to {local_filename}")
     download_file(node_version.download_url, local_filename)
 
     # Extract the downloaded archive to the custom_node directory on the workspace.
-    logging.debug(f"Start extracting the node {node_id} version {node_version.version} to {custom_nodes_path}")
+    logging.debug(f"Extracting the node {node_id} version {node_version.version} to {custom_nodes_path}")
     extract_package_as_zip(local_filename, node_specific_path)
 
     # TODO: temoporary solution to run requirement.txt and install script
