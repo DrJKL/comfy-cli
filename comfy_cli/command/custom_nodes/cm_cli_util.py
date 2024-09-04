@@ -27,7 +27,7 @@ def execute_cm_cli(args, channel=None, fast_deps=False, mode=None) -> str | None
     workspace_path = workspace_manager.workspace_path
 
     if not workspace_path:
-        print("\n[bold red]ComfyUI path is not resolved.[/bold red]\n", file=sys.stderr)
+        print("\n[bold red]ComfyUI path could not be resolved.[/bold red]\n", file=sys.stderr)
         raise typer.Exit(code=1)
 
     cm_cli_path = os.path.join(workspace_path, "custom_nodes", "ComfyUI-Manager", "cm-cli.py")
@@ -54,7 +54,7 @@ def execute_cm_cli(args, channel=None, fast_deps=False, mode=None) -> str | None
     new_env["__COMFY_CLI_SESSION__"] = session_path
     new_env["COMFYUI_PATH"] = workspace_path
 
-    print(f"Execute from: {workspace_path}")
+    print(f"Executing command in: {workspace_path}")
 
     try:
         result = subprocess.run(cmd, env=new_env, check=True, capture_output=True, text=True)
